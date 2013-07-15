@@ -442,8 +442,6 @@ static uint16_t get_uint16_le(unsigned char* buffer)
 static int prepare_wave_file(const char* filename, WAVInput* input)
 {
     int64_t size = 0;
-    int haveFormatData = 0;
-    int haveWAVEData = 0;
     unsigned char buffer[512];
 
     
@@ -528,7 +526,6 @@ static int prepare_wave_file(const char* filename, WAVInput* input)
                 return 0;
             }
             
-            haveFormatData = 1;
         }
         else if (memcmp(buffer, DATA_ID, 4) == 0)
         {
@@ -541,7 +538,6 @@ static int prepare_wave_file(const char* filename, WAVInput* input)
                 fprintf(stderr, "Failed to seek to end of wav chunk\n");
                 return 0;
             }
-            haveWAVEData = 1;
         }
         else
         {
